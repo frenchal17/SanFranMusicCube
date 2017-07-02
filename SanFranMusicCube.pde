@@ -25,22 +25,23 @@ void draw() {
   int change = floor(random(-1, 2)) * floor(random(1, 30));
   switch(rgbselect) {
     case 0:
-      redvalue += change;
+      redvalue = min(redvalue + change, 255);
       break;
     case 1:
-      greenvalue += change;
+      greenvalue = min(greenvalue + change, 255);
       break;
     case 2:
-      bluevalue += change;
+      bluevalue = min(bluevalue + change, 255);
       break;
   }
   fill(redvalue, bluevalue, greenvalue);
   stroke(0, 0, 0);
   translate(center.x, center.y, 0);
-  rotateX(frameCount/90.0);
-  rotateY(frameCount/100.0);
-  for (int i = 0; i < 1000; i++) {
+  rotateX(frameCount/900.0);
+  rotateY(frameCount/1000.0);
+  for (int i = 0; i < 7; i++) {
+    rotateX(frameCount/900.0);
+    rotateZ(frameCount/850.0);
     box(100 + player.left.get(i)*150);
   }
-  
 }
