@@ -1,5 +1,7 @@
 import ddf.minim.*;
+import peasy.*;
 
+PeasyCam cam;
 AudioPlayer player;
 Minim minim;
 
@@ -12,6 +14,9 @@ int bluevalue = 127;
 void setup() {
   size(600, 600, P3D);
   background(0);
+  cam = new PeasyCam(this, 100);
+  cam.setMinimumDistance(500);
+  cam.setMaximumDistance(2000);
   minim = new Minim(this);
   center = new PVector(width/2, height/2, 0);
   
@@ -20,6 +25,8 @@ void setup() {
 }
 
 void draw() {
+  rotateX(-1);
+  rotateY(-.5);
   angle += 0.07;
   int rgbselect = floor(random(0, 3));
   int change = floor(random(-1, 2)) * floor(random(1, 10));
@@ -36,13 +43,14 @@ void draw() {
   }
   directionalLight(redvalue,greenvalue,bluevalue, -1, -1, 0);
   directionalLight(redvalue,greenvalue,bluevalue, 1, -1, 0);
-  translate(center.x, center.y, 0);
+  directionalLight(redvalue,greenvalue,bluevalue, 1, 1, 0);
+  directionalLight(redvalue,greenvalue,bluevalue, -1, 1, 0);
+  
   rotateX(frameCount/900.0);
   rotateY(frameCount/1000.0);
-  box(100 + player.left.get(0)*150);
-  for (int i = 0; i < 7; i++) {
+  for (int i = 0; i < 16; i+=4) {
     rotateX(frameCount/900.0);
-    rotateZ(frameCount/850.0);
+    rotateY(frameCount/1000.0);
     box(100 + player.left.get(i)*150);
   }
 }
